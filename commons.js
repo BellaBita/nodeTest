@@ -1,6 +1,9 @@
 import * as fs from "fs";
 
-const mockData = new Map();
+/**
+ * Mock Data Cache via Map
+ */
+const cachedMockData = new Map();
 
 /**
  * dirPath하위의 *.mock.json 파일을 읽어서 초기 mock data를 로딩한다.
@@ -18,7 +21,7 @@ const loadMockObjects = (dirPath) => {
       const jsonFile = fs.readFileSync(`${dirPath}/${file}`, "utf8");
       const items = JSON.parse(jsonFile);
       items.forEach((item) => {
-        mockData.set(item.__id, item);
+        cachedMockData.set(item.__id, item);
       });
     }
   });
@@ -30,10 +33,10 @@ const loadMockObjects = (dirPath) => {
  * @returns Undefined Object
  */
 export const getMockData = (id) => {
-  if (mockData.size < 1) {
+  if (cachedMockData.size < 1) {
     loadMockObjects();
   }
-  return mockData.get(id);
+  return cachedMockData.get(id);
 };
 
 /**
@@ -42,12 +45,12 @@ export const getMockData = (id) => {
  * @returns Array of Object
  */
 export const getMockDataByType = (typeName) => {
-  if (mockData.size < 1) {
+  if (cachedMockData.size < 1) {
     loadMockObjects();
   }
   let array = new Array();
 
-  mockData.forEach((item) => {
+  cachedMockData.forEach((item) => {
     if (item.__typeName == typeName) {
       array.push(item);
     }
@@ -61,8 +64,8 @@ export const getMockDataByType = (typeName) => {
  * @returns {Map} 모든 MockData
  */
 export const getAllMockData = () => {
-  if (mockData.size < 1) {
+  if (cachedMockData.size < 1) {
     loadMockObjects();
   }
-  return mockData;
+  return cachedMockData;
 };
