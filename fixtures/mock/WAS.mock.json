@@ -1,0 +1,9 @@
+[
+  {
+    "__typeName": "ApplicationServer",
+    "__id": "was-01",
+    "name": "test-was-01",
+    "nodeId": "node-01",
+    "port": 8080
+  }
+]

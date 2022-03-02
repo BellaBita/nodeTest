@@ -1,0 +1,20 @@
+node_modules/
+npm-debug.*
+*.key
+*.orig.*
+web-build/
+.vscode/.react/
+yarn.lock
+
+# macOS
+.DS_Store
+*.logs
+
+#chart
+src/charts/*
+
+temp.json
+
+build/
+dist/
+node_modules/
